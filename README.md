@@ -11,13 +11,10 @@ This is a simple [Laravel](http://laravel.com/) service provider for making it e
 [AWS SDK for PHP v2](https://github.com/aws/aws-sdk-php) in your Laravel and Lumen applications.
 So that you can use IBM's Cloud Object Storage 'S3' compatible api.
 
-This README is for `projectmentor\aws-sdk-php-laravel`.
-
-Forked from `aws/aws-sdk-php-laravel` v3.x.
-
-Using branch `ibm-cos-s3`.
-
-Designated as version `dev-ibm-cos-s3`
+This README is for `projectmentor\aws-sdk-php-laravel`.<br />
+Forked from `aws/aws-sdk-php-laravel` v3.x.<br />
+Using branch `ibm-cos-s3`.<br />
+Designated as version `dev-ibm-cos-s3`<br />
 
 ***IMPORTANT***
 

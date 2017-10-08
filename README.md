@@ -1,4 +1,4 @@
-# AWS Service Provider for Laravel 5
+# AWS S3 v2.x Service Provider for Laravel 5.2 and IBM Cloud Object Storage
 
 <!-- [![@awsforphp on Twitter](http://img.shields.io/badge/twitter-%40awsforphp-blue.svg?style=flat)](https://twitter.com/awsforphp) -->
 <!-- [![Build Status](https://img.shields.io/travis/aws/aws-sdk-php-laravel.svg)](https://travis-ci.org/aws/aws-sdk-php-laravel) -->
@@ -7,27 +7,29 @@
 <!-- [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/aws/aws-sdk-php?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) -->
 
 This is a simple [Laravel](http://laravel.com/) service provider for making it easy to include the official
-[AWS SDK for PHP](https://github.com/aws/aws-sdk-php) in your Laravel and Lumen applications.
+[AWS SDK for PHP v2](https://github.com/aws/aws-sdk-php) in your Laravel and Lumen applications.
 
-This README is for the projectmentor\aws-sdk-php-laravel BRANCH ibm-cos-s3 FORKED From v3.x of the service provider.
+This README is for `projectmentor\aws-sdk-php-laravel` forked from `aws/aws-sdk-php-laravel` v3.x.
+We are using branch `ibm-cos-s3` for changes.
 
 ***IMPORTANT***
-The service provider HAS BEEN DOWNGRADED in this fork (branch ibm-cos-s3) to work with
+
+The service provider **HAS BEEN DOWNGRADED** in this fork (in branch ibm-cos-s3) to work with
 Version 2 of the AWS SDK forPHP and Laravel 5.2 and IBM Cloud Object Storage.
 
 IBM COS provides php access via it's own copy of 'S3 API' which seems to be based off of aws\aws-sdk-php v.2.5.
 However, I've been unable to find the source code online.
 
 Hence IBM's 'S3' api appears to contain a subset of the commands in amazon's 2.x version.
-[AWS 2.x to 3.x migration guide] (http://docs.aws.amazon.com/aws-sdk-php/v3/guide/guide/migration.html)
+[AWS 2.x to 3.x migration guide](http://docs.aws.amazon.com/aws-sdk-php/v3/guide/guide/migration.html)
 
-** This version forked from aws/aws-sdk-php-laravel v.3.x** 
+**This version forked from aws/aws-sdk-php-laravel v.3.x** 
 
-* **dev-ibm-cos-s3** ([ibm-cos-s3 branch] (https://github.com/projectmentor/aws-sdk-php-laravel/tree/ibm-cos-s3)) - For `laravel/framework:~5.2` and `aws/aws-sdk-php:~2.5`
+* **dev-ibm-cos-s3** ([ibm-cos-s3 branch](https://github.com/projectmentor/aws-sdk-php-laravel/tree/ibm-cos-s3)) - For `laravel/framework:~5.2` and `aws/aws-sdk-php:~2.5`
 
 **Major Upstream Versions:**
 
-* **3.x** ([master branch] https://github.com/aws/aws-sdk-php-laravel) - For `laravel/framework:~5.1` and `aws/aws-sdk-php:~3.0`
+* **3.x** ([master branch](https://github.com/aws/aws-sdk-php-laravel)) - For `laravel/framework:~5.1` and `aws/aws-sdk-php:~3.0`
 * **2.x** ([2.0 branch](https://github.com/aws/aws-sdk-php-laravel/tree/2.0)) - For `laravel/framework:5.0.*` and `aws/aws-sdk-php:~2.4`
 * **1.x** ([1.0 branch](https://github.com/aws/aws-sdk-php-laravel/tree/1.0)) - For `laravel/framework:4.*` and `aws/aws-sdk-php:~2.4`
 
@@ -130,7 +132,7 @@ the SDK's v2 User Guide.
 In order to use the AWS SDK for PHP within your app, you need to retrieve it from the [Laravel IoC
 Container](http://laravel.com/docs/ioc). The following example uses the Amazon S3 client to upload a file.
 
-```php
+<!--```php -->
 //TODO:
 <!-- $s3 = App::make('aws')->createClient('s3'); -->
 <!-- $s3->putObject(array( -->
@@ -138,12 +140,12 @@ Container](http://laravel.com/docs/ioc). The following example uses the Amazon S
 <!--     'Key'        => 'YOUR_OBJECT_KEY', -->
 <!--     'SourceFile' => '/the/path/to/the/file/you/are/uploading.ext', -->
 <!-- )); -->
-```
+<!--``` -->
 
 If the AWS facade is registered within the `aliases` section of the application configuration, you can also use the
 following technique.
 
-```php
+<!--```php -->
 //TODO:
 <!-- $s3 = AWS::createClient('s3'); -->
 <!-- $s3->putObject(array( -->
@@ -151,7 +153,7 @@ following technique.
 <!--     'Key'        => 'YOUR_OBJECT_KEY', -->
 <!--     'SourceFile' => '/the/path/to/the/file/you/are/uploading.ext', -->
 <!-- )); -->
-```
+<!--``` -->
 
 ## Links
 

@@ -1,39 +1,60 @@
 # AWS Service Provider for Laravel 5
 
-[![@awsforphp on Twitter](http://img.shields.io/badge/twitter-%40awsforphp-blue.svg?style=flat)](https://twitter.com/awsforphp)
-[![Build Status](https://img.shields.io/travis/aws/aws-sdk-php-laravel.svg)](https://travis-ci.org/aws/aws-sdk-php-laravel)
-[![Latest Stable Version](https://img.shields.io/packagist/v/aws/aws-sdk-php-laravel.svg)](https://packagist.org/packages/aws/aws-sdk-php-laravel)
-[![Total Downloads](https://img.shields.io/packagist/dt/aws/aws-sdk-php-laravel.svg)](https://packagist.org/packages/aws/aws-sdk-php-laravel)
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/aws/aws-sdk-php?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+<!-- [![@awsforphp on Twitter](http://img.shields.io/badge/twitter-%40awsforphp-blue.svg?style=flat)](https://twitter.com/awsforphp) -->
+<!-- [![Build Status](https://img.shields.io/travis/aws/aws-sdk-php-laravel.svg)](https://travis-ci.org/aws/aws-sdk-php-laravel) -->
+<!-- [![Latest Stable Version](https://img.shields.io/packagist/v/aws/aws-sdk-php-laravel.svg)](https://packagist.org/packages/aws/aws-sdk-php-laravel) -->
+<!-- [![Total Downloads](https://img.shields.io/packagist/dt/aws/aws-sdk-php-laravel.svg)](https://packagist.org/packages/aws/aws-sdk-php-laravel) -->
+<!-- [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/aws/aws-sdk-php?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) -->
 
 This is a simple [Laravel](http://laravel.com/) service provider for making it easy to include the official
 [AWS SDK for PHP](https://github.com/aws/aws-sdk-php) in your Laravel and Lumen applications.
 
-This README is for version 3.x of the service provider, which is implemented to work with Version 3 of the AWS SDK for
-PHP and Laravel 5.1.
+This README is for the projectmentor\aws-sdk-php-laravel BRANCH ibm-cos-s3 FORKED From v3.x of the service provider.
 
-**Major Versions:**
+***IMPORTANT***
+The service provider HAS BEEN DOWNGRADED in this fork (branch ibm-cos-s3) to work with
+Version 2 of the AWS SDK forPHP and Laravel 5.2 and IBM Cloud Object Storage.
 
-* **3.x** (YOU ARE HERE) - For `laravel/framework:~5.1` and `aws/aws-sdk-php:~3.0`
+IBM COS provides php access via it's own copy of 'S3 API' which seems to be based off of aws\aws-sdk-php v.2.5.
+However, I've been unable to find the source code online.
+
+Hence IBM's 'S3' api appears to contain a subset of the commands in amazon's 2.x version.
+[AWS 2.x to 3.x migration guide] (http://docs.aws.amazon.com/aws-sdk-php/v3/guide/guide/migration.html)
+
+** This version forked from aws/aws-sdk-php-laravel v.3.x** 
+
+* **dev-ibm-cos-s3** ([ibm-cos-s3 branch] (https://github.com/projectmentor/aws-sdk-php-laravel/tree/ibm-cos-s3)) - For `laravel/framework:~5.2` and `aws/aws-sdk-php:~2.5`
+
+**Major Upstream Versions:**
+
+* **3.x** ([master branch] https://github.com/aws/aws-sdk-php-laravel) - For `laravel/framework:~5.1` and `aws/aws-sdk-php:~3.0`
 * **2.x** ([2.0 branch](https://github.com/aws/aws-sdk-php-laravel/tree/2.0)) - For `laravel/framework:5.0.*` and `aws/aws-sdk-php:~2.4`
 * **1.x** ([1.0 branch](https://github.com/aws/aws-sdk-php-laravel/tree/1.0)) - For `laravel/framework:4.*` and `aws/aws-sdk-php:~2.4`
 
 ## Installation
 
-The AWS Service Provider can be installed via [Composer](http://getcomposer.org) by requiring the
-`aws/aws-sdk-php-laravel` package in your project's `composer.json`.
+The **ibm-cos-s3 branch** of the AWS Service Provider can be installed via [Composer](http://getcomposer.org) by:
+
+* Creating a [VCS repository] (https://getcomposer.org/doc/05-repositories.md#loading-a-package-from-a-vcs-repository) for this FORK.
+* Requiring the forked version `dev-ibm-cos-s3` of the `aws/aws-sdk-php-laravel` package in your project's `composer.json`.
 
 ```json
 {
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/projectmentor/aws-sdk-php-laravel"
+        }
+    ],
     "require": {
-        "aws/aws-sdk-php-laravel": "~3.0"
+        "aws/aws-sdk-php-laravel": "dev-ibm-cos-s3"
     }
 }
 ```
 
 Then run a composer update
 ```sh
-php composer.phar update
+php composer update
 ```
 
 To use the AWS Service Provider, you must register the provider when bootstrapping your application.
@@ -65,74 +86,83 @@ Find the `aliases` key in your `config/app.php` and add the AWS facade alias.
     )
 ```
 
-## Configuration
+## TODO: Configuration
+<!-- By default, the package uses the following environment variables to auto-configure the plugin without modification: -->
+<!-- ``` -->
+<!-- AWS_ACCESS_KEY_ID -->
+<!-- AWS_SECRET_ACCESS_KEY -->
+<!-- AWS_REGION (default = us-east-1) -->
+<!-- ``` -->
 
-By default, the package uses the following environment variables to auto-configure the plugin without modification:
-```
-AWS_ACCESS_KEY_ID
-AWS_SECRET_ACCESS_KEY
-AWS_REGION (default = us-east-1)
-```
+<!-- To customize the configuration file, publish the package configuration using Artisan. -->
 
-To customize the configuration file, publish the package configuration using Artisan.
+<!-- ```sh -->
+<!-- php artisan vendor:publish -->
+<!-- ``` -->
 
-```sh
-php artisan vendor:publish
-```
+<!-- Update your settings in the generated `app/config/aws.php` configuration file. -->
 
-Update your settings in the generated `app/config/aws.php` configuration file.
-
-```php
-return [
-    'credentials' => [
-        'key'    => 'YOUR_AWS_ACCESS_KEY_ID',
-        'secret' => 'YOUR_AWS_SECRET_ACCESS_KEY',
-    ],
-    'region' => 'us-west-2',
-    'version' => 'latest',
+<!-- ```php -->
+<!-- return [ -->
+<!--     'credentials' => [ -->
+<!--         'key'    => 'YOUR_AWS_ACCESS_KEY_ID', -->
+<!--         'secret' => 'YOUR_AWS_SECRET_ACCESS_KEY', -->
+<!--     ], -->
+<!--     'region' => 'us-west-2', -->
+<!--     'version' => 'latest', -->
     
-    // You can override settings for specific services
-    'Ses' => [
-        'region' => 'us-east-1',
-    ],
-];
-```
+<!--     // You can override settings for specific services -->
+<!--     'Ses' => [ -->
+<!--         'region' => 'us-east-1', -->
+<!--     ], -->
+<!-- ]; -->
+<!-- ``` -->
 
-Referring Laravel 5.2.0 [Upgrade guide](https://laravel.com/docs/5.2/upgrade#upgrade-5.2.0), you must using config 
+
+Referring Laravel 5.2.0 [Upgrade guide](https://laravel.com/docs/5.2/upgrade#upgrade-5.2.0), you must use config
 file instead of environment variable option if using php artisan `config:cache`.
 
-Learn more about [configuring the SDK](http://docs.aws.amazon.com/aws-sdk-php/v3/guide/guide/configuration.html) on
-the SDK's User Guide.
+Learn more about [configuring the v2 SDK](http://docs.aws.amazon.com/aws-sdk-php/v2/guide/configuration.html) on
+the SDK's v2 User Guide.
 
-## Usage
+## TODO: Usage
 
 In order to use the AWS SDK for PHP within your app, you need to retrieve it from the [Laravel IoC
 Container](http://laravel.com/docs/ioc). The following example uses the Amazon S3 client to upload a file.
 
 ```php
-$s3 = App::make('aws')->createClient('s3');
-$s3->putObject(array(
-    'Bucket'     => 'YOUR_BUCKET',
-    'Key'        => 'YOUR_OBJECT_KEY',
-    'SourceFile' => '/the/path/to/the/file/you/are/uploading.ext',
-));
+//TODO:
+<!-- $s3 = App::make('aws')->createClient('s3'); -->
+<!-- $s3->putObject(array( -->
+<!--     'Bucket'     => 'YOUR_BUCKET', -->
+<!--     'Key'        => 'YOUR_OBJECT_KEY', -->
+<!--     'SourceFile' => '/the/path/to/the/file/you/are/uploading.ext', -->
+<!-- )); -->
 ```
 
 If the AWS facade is registered within the `aliases` section of the application configuration, you can also use the
 following technique.
 
 ```php
-$s3 = AWS::createClient('s3');
-$s3->putObject(array(
-    'Bucket'     => 'YOUR_BUCKET',
-    'Key'        => 'YOUR_OBJECT_KEY',
-    'SourceFile' => '/the/path/to/the/file/you/are/uploading.ext',
-));
+//TODO:
+<!-- $s3 = AWS::createClient('s3'); -->
+<!-- $s3->putObject(array( -->
+<!--     'Bucket'     => 'YOUR_BUCKET', -->
+<!--     'Key'        => 'YOUR_OBJECT_KEY', -->
+<!--     'SourceFile' => '/the/path/to/the/file/you/are/uploading.ext', -->
+<!-- )); -->
 ```
 
 ## Links
 
-* [AWS SDK for PHP on Github](http://github.com/aws/aws-sdk-php/)
+<!-- * [IBM COS S3 API]() -->
+* [IBM COS S3 Developer Intro](https://developer.ibm.com/recipes/tutorials/cloud-object-storage-s3-api-intro)
+* [IBM COS S3 API Reference](https://ibm-public-cos.github.io/crs-docs/api-reference)
+* [IBM COS S3 Compatibility](https://ibm-public-cos.github.io/crs-docs/about-compatibility-api)
+* [IBM COS API Guides](https://ibm-public-cos.github.io/crs-docs/using-the-api)
+
+
+* [AWS SDK for PHP on Github](http://github.com/aws/aws-sdk-php/tree/2.8)
 * [AWS SDK for PHP website](http://aws.amazon.com/sdkforphp/)
 * [AWS on Packagist](https://packagist.org/packages/aws/)
 * [License](http://aws.amazon.com/apache2.0/)

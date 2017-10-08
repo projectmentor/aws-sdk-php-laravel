@@ -1,4 +1,5 @@
-# AWS S3 v2.x Service Provider for Laravel 5.2 and IBM Cloud Object Storage
+# AWS S3 Service Provider 
+for Laravel 5.2 and AWS SDK 2.x and IBM Cloud Object Storage
 
 <!-- [![@awsforphp on Twitter](http://img.shields.io/badge/twitter-%40awsforphp-blue.svg?style=flat)](https://twitter.com/awsforphp) -->
 <!-- [![Build Status](https://img.shields.io/travis/aws/aws-sdk-php-laravel.svg)](https://travis-ci.org/aws/aws-sdk-php-laravel) -->
@@ -8,22 +9,23 @@
 
 This is a simple [Laravel](http://laravel.com/) service provider for making it easy to include the official
 [AWS SDK for PHP v2](https://github.com/aws/aws-sdk-php) in your Laravel and Lumen applications.
+So that you can use IBM's Cloud Object Storage 'S3' compatible api.
 
-This README is for `projectmentor\aws-sdk-php-laravel` forked from `aws/aws-sdk-php-laravel` v3.x.
-We are using branch `ibm-cos-s3` for changes.
+This README is for `projectmentor\aws-sdk-php-laravel`.
+Forked from `aws/aws-sdk-php-laravel` v3.x.
+Using branch `ibm-cos-s3`.
+Designated as version `dev-ibm-cos-s3`
 
 ***IMPORTANT***
 
-The service provider **HAS BEEN DOWNGRADED** in this fork (in branch ibm-cos-s3) to work with
-Version 2 of the AWS SDK forPHP and Laravel 5.2 and IBM Cloud Object Storage.
+The service provider **HAS BEEN DOWNGRADED** in this fork.
 
 IBM COS provides php access via it's own copy of 'S3 API' which seems to be based off of aws\aws-sdk-php v.2.5.
 However, I've been unable to find the source code online.
 
 Hence IBM's 'S3' api appears to contain a subset of the commands in amazon's 2.x version.
-[AWS 2.x to 3.x migration guide](http://docs.aws.amazon.com/aws-sdk-php/v3/guide/guide/migration.html)
 
-**This version forked from aws/aws-sdk-php-laravel v.3.x** 
+**This version** 
 
 * **dev-ibm-cos-s3** ([ibm-cos-s3 branch](https://github.com/projectmentor/aws-sdk-php-laravel/tree/ibm-cos-s3)) - For `laravel/framework:~5.2` and `aws/aws-sdk-php:~2.5`
 
@@ -35,9 +37,9 @@ Hence IBM's 'S3' api appears to contain a subset of the commands in amazon's 2.x
 
 ## Installation
 
-The **ibm-cos-s3 branch** of the AWS Service Provider can be installed via [Composer](http://getcomposer.org) by:
+The **dev-ibm-cos-s3** version can be installed via [Composer](http://getcomposer.org) by:
 
-* Creating a [VCS repository] (https://getcomposer.org/doc/05-repositories.md#loading-a-package-from-a-vcs-repository) for this FORK.
+* Creating a [VCS repository](https://getcomposer.org/doc/05-repositories.md#loading-a-package-from-a-vcs-repository) for this FORK.
 * Requiring the forked version `dev-ibm-cos-s3` of the `aws/aws-sdk-php-laravel` package in your project's `composer.json`.
 
 ```json
@@ -162,8 +164,7 @@ following technique.
 * [IBM COS S3 API Reference](https://ibm-public-cos.github.io/crs-docs/api-reference)
 * [IBM COS S3 Compatibility](https://ibm-public-cos.github.io/crs-docs/about-compatibility-api)
 * [IBM COS API Guides](https://ibm-public-cos.github.io/crs-docs/using-the-api)
-
-
+* [AWS 2.x to 3.x migration guide](http://docs.aws.amazon.com/aws-sdk-php/v3/guide/guide/migration.html)
 * [AWS SDK for PHP on Github](http://github.com/aws/aws-sdk-php/tree/2.8)
 * [AWS SDK for PHP website](http://aws.amazon.com/sdkforphp/)
 * [AWS on Packagist](https://packagist.org/packages/aws/)

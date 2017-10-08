@@ -1,5 +1,5 @@
 # AWS S3 Service Provider 
-for Laravel 5.2 and AWS SDK 2.x and IBM Cloud Object Storage
+***for Laravel 5.2 and AWS SDK 2.x and IBM Cloud Object Storage***
 
 <!-- [![@awsforphp on Twitter](http://img.shields.io/badge/twitter-%40awsforphp-blue.svg?style=flat)](https://twitter.com/awsforphp) -->
 <!-- [![Build Status](https://img.shields.io/travis/aws/aws-sdk-php-laravel.svg)](https://travis-ci.org/aws/aws-sdk-php-laravel) -->

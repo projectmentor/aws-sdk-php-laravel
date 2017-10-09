@@ -16,8 +16,38 @@ abstract class AwsServiceProviderTest extends \PHPUnit_Framework_TestCase
         AWS::setFacadeApplication($app);
 
         // Get an instance of a client (S3) via the facade.
-        $s3 = AWS::createClient('S3');
+        //REMOVE DOWNGRADED
+        //$s3 = AWS::createClient('S3');
+        //END REMOVE DOWNGRADED
+
+        $s3 = AWS::get('S3');
         $this->assertInstanceOf('Aws\S3\S3Client', $s3);
+    }
+
+
+    /*---------------------------------------------------------
+     | N.B. DOWNGRADED This method is deprecated in v3
+     | but added back here for v2 compatibility.
+     |---------------------------------------------------------
+    */
+    public function testRegisterAwsServiceProviderWithConfigFile()
+    {
+        $app = $this->setupApplication();
+        $this->setupServiceProvider($app);
+
+        // Simulate global config; specify config file
+        $app['config']->set('aws', [
+            'config_file' => __DIR__ . '/test_services.json'
+        ]);
+
+        // Get an instance of a client (S3)
+        /** @var $s3 \Aws\S3\S3Client */
+        $s3 = $app['aws']->get('s3');
+        $this->assertInstanceOf('Aws\S3\S3Client', $s3);
+
+        // Verify that the client received the credentials from the global config
+        $this->assertEquals('change_me', $s3->getCredentials()->getAccessKeyId());
+        $this->assertEquals('change_me', $s3->getCredentials()->getSecretKey());
     }
 
     public function testRegisterAwsServiceProviderWithPackageConfigAndEnv()
@@ -27,12 +57,24 @@ abstract class AwsServiceProviderTest extends \PHPUnit_Framework_TestCase
 
         // Get an instance of a client (S3).
         /** @var $s3 \Aws\S3\S3Client */
-        $s3 = $app['aws']->createClient('S3');
+        
+        //REMOVE DOWNGRADED
+        //$s3 = $app['aws']->createClient('S3');
+        //END REMOVE DOWNGRADED
+
+        $s3 = $app['aws']->get('S3');
         $this->assertInstanceOf('Aws\S3\S3Client', $s3);
 
         // Verify that the client received the credentials from the package config.
-        /** @var \Aws\Credentials\CredentialsInterface $credentials */
-        $credentials = $s3->getCredentials()->wait();
+        //REMOVE DOWNGRADED
+        /** //var \Aws\Credentials\CredentialsInterface $credentials */
+        //END REMOVE DOWNGRADED
+
+
+        /** @var \Aws\Common\Credentials\CredentialsInterface $credentials */
+        $credentials = $s3->getCredentials()->wait();   //is wait() chainable in v2?
+
+        //N.B. These Credentials are loaded from environment vars in phpunit.xml
         $this->assertEquals('foo', $credentials->getAccessKeyId());
         $this->assertEquals('bar', $credentials->getSecretKey());
         $this->assertEquals('baz', $s3->getRegion());
@@ -45,19 +87,21 @@ abstract class AwsServiceProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('aws', $provider->provides());
     }
 
-    public function testVersionInformationIsProvidedToSdkUserAgent()
-    {
-        $app = $this->setupApplication();
-        $this->setupServiceProvider($app);
-        $config = $app['config']->get('aws');
+    //REMOVE DOWNGRADED
+    //public function testVersionInformationIsProvidedToSdkUserAgent()
+    //{
+    //    $app = $this->setupApplication();
+    //    $this->setupServiceProvider($app);
+    //    $config = $app['config']->get('aws');
 
-        $this->assertArrayHasKey('ua_append', $config);
-        $this->assertInternalType('array', $config['ua_append']);
-        $this->assertNotEmpty($config['ua_append']);
-        $this->assertNotEmpty(array_filter($config['ua_append'], function ($ua) {
-            return false !== strpos($ua, AwsServiceProvider::VERSION);
-        }));
-    }
+    //    $this->assertArrayHasKey('ua_append', $config);
+    //    $this->assertInternalType('array', $config['ua_append']);
+    //    $this->assertNotEmpty($config['ua_append']);
+    //    $this->assertNotEmpty(array_filter($config['ua_append'], function ($ua) {
+    //        return false !== strpos($ua, AwsServiceProvider::VERSION);
+    //    }));
+    //}
+    //END REMOVE
 
     /**
      * @return Container

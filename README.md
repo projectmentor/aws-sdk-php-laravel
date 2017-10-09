@@ -90,43 +90,36 @@ Find the `aliases` key in your `config/app.php` and add the AWS facade alias.
     )
 ```
 
-## TODO: Configuration
-<!-- By default, the package uses the following environment variables to auto-configure the plugin without modification: -->
-<!-- ``` -->
-<!-- AWS_ACCESS_KEY_ID -->
-<!-- AWS_SECRET_ACCESS_KEY -->
-<!-- AWS_REGION (default = us-east-1) -->
-<!-- ``` -->
+## Configuration
+By default, the package uses the following environment variables to auto-configure the plugin without modification:
+```
+AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY
+AWS_REGION              //default = us-south
+AWS_CONFIG_FILE         //default = null
+```
 
-<!-- To customize the configuration file, publish the package configuration using Artisan. -->
+To customize the configuration file, publish the package configuration using Artisan.
 
-<!-- ```sh -->
-<!-- php artisan vendor:publish -->
-<!-- ``` -->
+```sh
+php artisan vendor:publish --provider="Aws\Laravel\AwsServiceProvider"
+```
 
-<!-- Update your settings in the generated `app/config/aws.php` configuration file. -->
+Update your settings in the generated `config/aws.php` configuration file.
 
-<!-- ```php -->
-<!-- return [ -->
-<!--     'credentials' => [ -->
-<!--         'key'    => 'YOUR_AWS_ACCESS_KEY_ID', -->
-<!--         'secret' => 'YOUR_AWS_SECRET_ACCESS_KEY', -->
-<!--     ], -->
-<!--     'region' => 'us-west-2', -->
-<!--     'version' => 'latest', -->
-    
-<!--     // You can override settings for specific services -->
-<!--     'Ses' => [ -->
-<!--         'region' => 'us-east-1', -->
-<!--     ], -->
-<!-- ]; -->
-<!-- ``` -->
+```php
+return [
+     'key'          => 'YOUR_AWS_ACCESS_KEY_ID',
+     'secret'       => 'YOUR_AWS_SECRET_KEY',
+     'region'       => 'us-south',
+     'config_file'  => null
+ ]; 
+``` 
 
+Referring to the Laravel 5.2.0 [Upgrade guide](https://laravel.com/docs/5.2/upgrade#upgrade-5.2.0); you must use a 
+config file instead of environment variable option if using php artisan `config:cache`.
 
-Referring Laravel 5.2.0 [Upgrade guide](https://laravel.com/docs/5.2/upgrade#upgrade-5.2.0), you must use config
-file instead of environment variable option if using php artisan `config:cache`.
-
-Learn more about [configuring the v2 SDK](http://docs.aws.amazon.com/aws-sdk-php/v2/guide/configuration.html) on
+Learn more about [configuring the v2 AWS SDK](http://docs.aws.amazon.com/aws-sdk-php/v2/guide/configuration.html) on
 the SDK's v2 User Guide.
 
 ## TODO: Usage

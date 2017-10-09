@@ -4,14 +4,12 @@ namespace Aws\Laravel;
 
 //REMOVE DOWNGRADED
 //use Aws\Sdk;
-//use Illuminate\Foundation\Application as LaravelApplication;
-//use Illuminate\Support\ServiceProvider;
-//use Laravel\Lumen\Application as LumenApplication;
 //END REMOVE DOWNGRADED
 
-
-use Aws\Common\Aws;
+use Aws\Common\Aws; 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Foundation\Application as LaravelApplication;
+use Laravel\Lumen\Application as LumenApplication;
 
 /**
  * AWS SDK for PHP service provider for Laravel applications

@@ -1,16 +1,26 @@
-<?php namespace Aws\Laravel;
+<?php
 
-use Aws\Sdk;
-use Illuminate\Foundation\Application as LaravelApplication;
+namespace Aws\Laravel;
+
+//REMOVE DOWNGRADED
+//use Aws\Sdk;
+//use Illuminate\Foundation\Application as LaravelApplication;
+//use Illuminate\Support\ServiceProvider;
+//use Laravel\Lumen\Application as LumenApplication;
+//END REMOVE DOWNGRADED
+
+
+use Aws\Common\Aws;
 use Illuminate\Support\ServiceProvider;
-use Laravel\Lumen\Application as LumenApplication;
 
 /**
  * AWS SDK for PHP service provider for Laravel applications
  */
 class AwsServiceProvider extends ServiceProvider
 {
-    const VERSION = '3.1.0';
+    //REMOVE DOWNGRADED
+    //const VERSION = '3.1.0';
+    //END REMOVE DOWNGRADED
 
     /**
      * Indicates if loading of the provider is deferred.
@@ -46,11 +56,23 @@ class AwsServiceProvider extends ServiceProvider
     {
         $this->app->singleton('aws', function ($app) {
             $config = $app->make('config')->get('aws');
+            
+            //REMOVE DOWNGRADED
+            //return new Sdk($config);
+            //END REMOVE DOWNGRADED
 
-            return new Sdk($config);
+            if (isset($config['config_file'])) {
+                $config = $config['config_file'];
+            }
+
+            return Aws::factory($config);            
         });
 
-        $this->app->alias('aws', 'Aws\Sdk');
+        //REMOVE DOWNGRADED
+        //$this->app->alias('aws', 'Aws\Sdk');
+        //END REMOVE DOWNGRADED
+
+        $this->app->alias('aws', 'Aws\Common\Aws');
     }
 
     /**
@@ -60,7 +82,11 @@ class AwsServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['aws', 'Aws\Sdk'];
+        //REMOVE DOWNGRADED
+        //return ['aws', 'Aws\Sdk'];
+        //END REMOVE DOWNGRADED
+
+        return ['aws', 'Aws\Common\Aws'];
     }
 
 }

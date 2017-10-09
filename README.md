@@ -37,7 +37,7 @@ Hence IBM's 'S3' api appears to contain a subset of the commands in amazon's 2.x
 
 ## Installation
 
-The **dev-ibm-cos-s3** version can be installed via [Composer](http://getcomposer.org) by:
+This packages **dev-ibm-cos-s3** version can be installed in your host application via [Composer](http://getcomposer.org) by:
 
 * Creating a [VCS repository](https://getcomposer.org/doc/05-repositories.md#loading-a-package-from-a-vcs-repository) for this FORK.
 * Requiring the forked version `dev-ibm-cos-s3` of the `aws/aws-sdk-php-laravel` package in your project's `composer.json`.

@@ -68,11 +68,12 @@ abstract class AwsServiceProviderTest extends \PHPUnit_Framework_TestCase
         // Verify that the client received the credentials from the package config.
         //REMOVE DOWNGRADED
         /** //var \Aws\Credentials\CredentialsInterface $credentials */
+        //$credentials = $s3->getCredentials()->wait();   //is wait() chainable in v2?
         //END REMOVE DOWNGRADED
 
 
         /** @var \Aws\Common\Credentials\CredentialsInterface $credentials */
-        $credentials = $s3->getCredentials()->wait();   //is wait() chainable in v2?
+        $credentials = $s3->getCredentials();   // wait() is not chainable in v2.
 
         //N.B. These Credentials are loaded from environment vars in phpunit.xml
         $this->assertEquals('foo', $credentials->getAccessKeyId());

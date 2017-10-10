@@ -91,13 +91,19 @@ Find the `aliases` key in your `config/app.php` and add the AWS facade alias.
 ```
 
 ## Configuration
-By default, the package uses the following environment variables to auto-configure the plugin without modification:
+By default, the package uses the following environment variables to auto-configure the plugin:  
+Hence, you may set them in your .env file in the host project directory. 
+
+
 ```
 AWS_ACCESS_KEY_ID
 AWS_SECRET_ACCESS_KEY
 AWS_REGION              //default = us-south
+AWS_ENDPOINT            //default = https://s3.us-south.objectstorage.softlayer.net
 AWS_CONFIG_FILE         //default = null
 ```
+Note: You can\'t use the same envronment variables to access both Amazon AWS and IBM COS _simultaneously_.  
+See [the AWS SDK V2 Guide](http://docs.aws.amazon.com/aws-sdk-php/v2/guide/credentials.html#credential-profiles) for alternate methods of providing credentials to the client.
 
 To customize the configuration file, publish the package configuration using Artisan.
 

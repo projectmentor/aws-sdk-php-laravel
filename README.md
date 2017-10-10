@@ -118,6 +118,7 @@ return [
      'key'          => 'YOUR_AWS_ACCESS_KEY_ID',
      'secret'       => 'YOUR_AWS_SECRET_KEY',
      'region'       => 'us-south',
+     'endpoint'     => 'https://s3.us-south.objectstorage.softlayer.net',
      'config_file'  => null
  ]; 
 ``` 
